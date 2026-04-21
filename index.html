@@ -1,349 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta name="generator" content="Hugo 0.118.2">
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<title itemprop="name"> Raghu Shubhangi | Applied AI & Backend Developer</title>
-<meta name="description" content="Applied AI and backend developer building systems using Python, APIs, and multi-stage pipelines integrating CV, OCR, and LLMs." />
-<meta property="og:site_name" content="Raghu Shubhangi" />
-<meta property="og:url" content="https://raghushubi.github.io/" />
-<meta property="og:locale" content="en">
-<meta property="og:image" content="/images/tailbliss-cover.png" />
-<meta property="og:image:secure_url" content="https://raghushubi.github.io/images/tailbliss-cover.png" />
-<meta property="og:type" content="website" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raghu Shubhangi | Applied AI & Backend Developer</title>
+    <meta name="description" content="Applied AI and backend developer building systems using Python, APIs, and multi-stage pipelines integrating CV, OCR, and LLMs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --surface: #141414;
+            --surface2: #1a1a1a;
+            --border: #2a2a2a;
+            --accent: #c8ff00;
+            --accent2: #00d4ff;
+            --text: #e8e8e8;
+            --muted: #666;
+            --white: #f5f5f5;
+        }
 
-<script>
-    
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark')
-    }
-</script>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
 
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Syne', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-<link rel="stylesheet" href="/css/style.min.9a429de0074bb03b54a5dae5ec7013170c72f4d11103257e4b1ae0985e52da3d.css" integrity="sha256-mkKd4AdLsDtUpdrl7HATFwxy9NERAyV+SxrgmF5S2j0=" />
+        /* ── NOISE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
 
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 clamp(1.5rem, 5vw, 4rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: calc(100vh - 60px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 3rem; padding-bottom: 3rem; }
+        }
+
+        .hero-left {}
+
+        .hero-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.0;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .hero-role {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 600;
+            color: var(--accent2);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-bio {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #aaa;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--accent);
+            color: #000;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.85rem 1.75rem;
+            transition: all 0.2s;
+        }
+
+        .hero-cta:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ── CONTACT CARD ── */
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--accent2));
+        }
+
+        .contact-card-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: #bbb;
+            font-size: 0.88rem;
+            text-decoration: none;
+        }
+
+        a.contact-item:hover { color: var(--accent); }
+        a.contact-item:hover .contact-icon { color: var(--accent); }
+
+        .contact-icon {
+            color: var(--accent2);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .contact-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        /* ── SECTION ── */
+        .section {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.01em;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── PROJECT GRID ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s;
+            cursor: pointer;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.35s ease;
+        }
+
+        .project-card:hover {
+            border-color: #3a3a3a;
+            transform: translateY(-4px);
+        }
+
+        .project-card:hover::after { width: 100%; }
+
+        .project-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.15em;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.25;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: #888;
+            flex: 1;
+        }
+
+        .project-link-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent2);
+            letter-spacing: 0.05em;
+            margin-top: auto;
+            transition: color 0.2s;
+        }
+
+        .project-card:hover .project-link-row { color: var(--accent); }
+
+        .arrow {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover .arrow { transform: translateX(4px); }
+
+        /* ── DIVIDER ── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-left > * {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+        .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+
+        .contact-card {
+            animation: fadeUp 0.6s 0.3s ease both;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 2rem clamp(1.5rem, 5vw, 4rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-zinc-100 dark:bg-gray-800">
-    <div class="top-0 z-50 w-full text-gray-200 bg-gray-900 border-2 border-gray-900 md:sticky border-b-stone-200/10">
-    <div x-data="{ open: false }"
-         class="flex flex-col max-w-full px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-        <div class="flex flex-row items-center justify-between p-4">
-            <a href="/" class="flex text-gray-100 transition duration-1000 ease-in-out group">
-                <img src="/images/site-logo.svg"
-                     class="transition-opacity h-9 w-9 group-hover:opacity-50 group-focus:opacity-70"
-                     alt="Raghu Shubhangi" />
-                <div
-                     class="mt-1 ml-3 text-xl font-black tracking-tight text-gray-100 uppercase transition-colors group-hover:text-gray-400/60">
-                    Raghu Shubhangi</div>
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">RS</a>
+        <a href="#projects" class="nav-link">Projects</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-left">
+            <div class="hero-tag">Available for opportunities</div>
+            <h1>Raghu<br><span>Shubhangi</span></h1>
+            <div class="hero-role">Applied AI &amp; Backend Developer</div>
+            <p class="hero-bio">
+                Computer Science undergraduate building backend systems and applied AI solutions using Python and JavaScript. 
+                Experience in multi-stage pipelines integrating computer vision, OCR, and LLMs — with focus on reliability and real-world problem solving.
+            </p>
+            <a href="https://drive.google.com/file/d/19thrsWsHGbqLaFoT57DkTgZuf_y7k-tD/view?usp=sharing" target="_blank" class="hero-cta">
+                View Resume
+                <span>↗</span>
             </a>
-            <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open" role="navigation" aria-expanded="false" aria-label="Main" aria-controls="menuItems">
-                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                    <path x-show="!open" fill-rule="evenodd"
-    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-    clip-rule="evenodd"></path>
-                    <path x-show="open" fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
-                </svg>
-            </button>
         </div>
-        <nav :class="{'flex': open, 'hidden': !open}"
-             class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-            
-            
-            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-primary-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline"
-                href="https://raghushubi.github.io/about/" title="About">
-                About
-            </a>
-            
-            
-            
-            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-primary-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline"
-                href="https://raghushubi.github.io/portfolio/" title="Portfolio">
-                Portfolio
-            </a>
-            
-            
-            
-            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-primary-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline"
-                href="https://raghushubi.github.io/contact/" title="Contact">
-                Contact
-            </a>
-            
-            
-            
-            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-primary-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline"
-                href="https://raghushubi.github.io/blog/" title="Blog">
-                Blog
-            </a>
-            
-            
-            
-            <button id="theme-toggle" type="button"
-                    class="p-2 text-sm text-gray-500 rounded-lg md: dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 md:ml-2 max-w-5 xs:hidden">
-                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z">
-                    </path>
-                </svg>
-                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                     aria-label="Dark or Light Mode" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                          fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-            
-        </nav>
-    </div>
-</div>
-    
-<main>
-    <div class="bg-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl px-4 py-8 mx-auto">
-            <div class="grid items-center gap-8 mb-8 sm:mb-0 lg:gap-12 lg:grid-cols-12">
-                <div class="col-span-6 px-4 text-center sm:mb-6 lg:text-left lg:mb-0">
-                    <h1 class="mb-2 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl xl:text-6xl dark:text-white">
-                        Raghu Shubhangi
-                    </h1>
 
-                    <h2 class="pb-2 text-3xl font-light text-gray-800 dark:text-gray-300 md:text-4xl">
-                        Applied AI & Backend Developer
-                    </h2>
+        <!-- CONTACT CARD -->
+        <div class="contact-card">
+            <div class="contact-card-title">// Contact &amp; Links</div>
 
-                    <p class="max-w-xl mx-auto mb-6 font-normal text-gray-900 lg:mx-0 xl:mb-2 md:text-lg xl:text-xl dark:text-gray-50">
-                        Computer Science undergraduate building backend systems and applied AI solutions using Python and JavaScript. 
-                        Experience in developing multi-stage pipelines integrating computer vision, OCR, and LLMs, along with API-based applications focused on reliability and real-world problem solving.
-                    </p>
-                    <p class="mt-4 text-sm text-blue-600">
-                        Resume: https://drive.google.com/file/d/19thrsWsHGbqLaFoT57DkTgZuf_y7k-tD/view?usp=sharing
-                    </p>
-                </div>
-                <div class="col-span-6">
-                    
+            <a href="mailto:raghushubhangi@gmail.com" class="contact-item">
+                <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span>
+                    <span class="contact-label">Email</span>
+                    raghushubhangi@gmail.com
+                </span>
+            </a>
 
-                    
-                    
+            <a href="tel:+918885498538" class="contact-item">
+                <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.34h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>
+                    <span class="contact-label">Phone</span>
+                    +91 8885498538
+                </span>
+            </a>
 
-                    <img srcset="/images/pages/tailbliss-rocket-indigo_hufd548659203cff68f253872614e51f33_333717_400x400_fill_q90_h2_box_smart1_3.webp 400w, /images/pages/tailbliss-rocket-indigo_hufd548659203cff68f253872614e51f33_333717_576x576_fill_q90_h2_box_smart1_3.webp 576w" src="/images/pages/tailbliss-rocket-indigo.png" width="100%" height="" alt="TailBliss Hero" class="w-full max-w-xl mx-auto rounded-lg" />
-                </div>
-            </div>
+            <a href="https://www.linkedin.com/in/raghu-shubhangi-5b035228b/" target="_blank" class="contact-item">
+                <svg class="contact-icon" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                <span>
+                    <span class="contact-label">LinkedIn</span>
+                    raghu-shubhangi
+                </span>
+            </a>
+
+            <a href="https://github.com/Raghushubi" target="_blank" class="contact-item">
+                <svg class="contact-icon" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>
+                    <span class="contact-label">GitHub</span>
+                    github.com/Raghushubi
+                </span>
+            </a>
+
+            <a href="https://drive.google.com/file/d/19thrsWsHGbqLaFoT57DkTgZuf_y7k-tD/view?usp=sharing" target="_blank" class="contact-item">
+                <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+                <span>
+                    <span class="contact-label">Resume</span>
+                    View on Google Drive
+                </span>
+            </a>
         </div>
     </div>
 
-    
+    <div class="divider"></div>
 
-    
-    <div class="relative my-4">
-        <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
-            <div class="relative sm:py-8 lg:py-0">
-                <div aria-hidden="true" class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen">
-                    <div class="absolute inset-y-0 w-full bg-gray-50 dark:bg-gray-900/10 right-1/2 rounded-r-3xl lg:right-72"></div><svg class="absolute -ml-3 top-8 left-1/2 lg:-right-8 lg:left-auto lg:top-12" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
-                        <defs>
-                            <pattern id="02f20b47-fd69-4224-a62a-4c9de5c763f7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                                <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-gray-900/60" fill="currentcolor"></rect>
-                            </pattern>
-                        </defs>
-                        <rect width="404" height="392" fill="url(#02f20b47-fd69-4224-a62a-4c9de5c763f7)"></rect>
-                    </svg>
-                </div>
-                <div class="relative w-full h-auto px-4 py-6 mx-auto sm:max-w-3xl sm:px-6 lg:px-0 lg:py-20">
-                    <div class="overflow-hidden shadow-xl rounded-2xl">
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
-                <div class="md:pt-12 sm:pt-6 lg:pt-20">
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
-                        
-                    </h2>
-                    <div class="mt-6 text-gray-900 dark:text-white">
-                        <div class="mt-6 space-y-6 text-gray-900 dark:text-white">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
         </div>
-    </div>
 
-    
-    <div class="overflow-hidden sm:pt-6 lg:relative">
-        <div class="max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-12 lg:px-8">
-            <div>
-                <div class="md:mt-8">
-                    <div class="mt-6 sm:max-w-xl">
-                        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl md:mt-16">
-                            
-                        </h2>
-                        
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sm:mx-auto sm:max-w-3xl sm:px-6">
-            <div class="md:py-12 sm:relative sm:mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <div class="hidden sm:block">
-                    <div class="absolute inset-y-0 w-screen left-1/2 rounded-l-3xl bg-gray-50 dark:bg-gray-900/10 lg:left-80 lg:right-0 lg:w-full"></div><svg class="absolute -mr-3 top-8 right-1/2 lg:left-0 lg:m-0" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
-                        <defs>
-                            <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                                <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-gray-900/60" fill="currentcolor"></rect>
-                            </pattern>
-                        </defs>
-                        <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
-                    </svg>
-                </div>
-                <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:h-full lg:max-w-none lg:pl-12">
-                    
-                    
+        <div class="projects-grid">
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    
-    <div class="max-w-md px-4 mx-auto md:pt-24 md:pb-16 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24">
-            <div class="mt-12 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-0 lg:grid-cols-2">
-                
-            </div>
-            <div>
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
-                    
-                </h2>
-                
-                
-            </div>
-        </div>
-    </div>
-
-    
-    <div class="relative px-1 pt-8 pb-4 bg-transparent lg:px-8 lg:pt-12 lg:mb-4 md:mt-12">
-        <div class="absolute inset-0">
-            <div class="bg-gray-200 dark:bg-gray-900/50 h-1/3 sm:h-2/3"></div>
-        </div>
-        <div class="relative px-2 mx-auto max-w-7xl">
-            <div class="text-center">
-                <h2 class="text-3xl font-black tracking-tight text-primary-500 dark:text-primary-300 sm:text-4xl">
-                    
-                </h2>
-                
-            </div>
-
-            <div class="mx-auto text-gray-900 max-w-7xl dark:text-gray-50 md:px-1.5">
-                <div class="px-4 text-gray-900 dark:text-white not-prose dark:text-zinc-200">
-                    <div class="grid gap-4 mx-auto mt-12 mb-4 lg:max-w-none md:grid-cols-3">
-
-    <!-- PCB Project -->
-    <div class="flex flex-col overflow-hidden rounded-lg shadow-lg bg-gray-50 dark:bg-gray-900">
-        <div class="p-6">
-            <div class="flex-1">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-gray-200">
-                    PCB Cost Estimation System
-                </h3>
-                <p class="mt-3 text-base text-gray-900 dark:text-gray-300">
+            <!-- Project 1 -->
+            <a href="https://github.com/Raghushubi/IPSA" target="_blank" class="project-card">
+                <div class="project-number">PROJECT_01</div>
+                <div class="project-title">PCB Cost Estimation System</div>
+                <p class="project-desc">
                     Applied AI system integrating computer vision, OCR, and LLM-based reasoning to estimate PCB cost. 
                     Built a multi-stage backend pipeline for component detection, feature extraction, and structured analysis, 
                     with focus on modular design, reliability, and real-world constraints.
                 </p>
-                <p class="mt-2 text-sm text-blue-600">
-                    GitHub: https://github.com/Raghushubi/IPSA
-                </p>
-            </div>
-        </div>
-    </div>
+                <div class="project-link-row">
+                    github.com/Raghushubi/IPSA
+                    <span class="arrow">→</span>
+                </div>
+            </a>
 
-    <!-- MoodWave -->
-    <div class="flex flex-col overflow-hidden rounded-lg shadow-lg bg-gray-50 dark:bg-gray-900">
-        <div class="p-6">
-            <div class="flex-1">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-gray-200">
-                    MoodWave – Mood-Based Music Platform
-                </h3>
-                <p class="mt-3 text-base text-gray-900 dark:text-gray-300">
+            <!-- Project 2 -->
+            <a href="https://github.com/Raghushubi/moodwave-app" target="_blank" class="project-card">
+                <div class="project-number">PROJECT_02</div>
+                <div class="project-title">MoodWave – Mood-Based Music Platform</div>
+                <p class="project-desc">
                     Full-stack application combining AI-based mood detection with backend-driven music recommendation. 
                     Developed REST APIs using Node.js and Express, integrated MongoDB for user data, 
                     and implemented end-to-end flow from mood inference to playlist generation.
                 </p>
-                <p class="mt-2 text-sm text-blue-600">
-                    GitHub: https://github.com/Raghushubi/moodwave-app
-                </p>
-            </div>
-        </div>
-    </div>
+                <div class="project-link-row">
+                    github.com/Raghushubi/moodwave-app
+                    <span class="arrow">→</span>
+                </div>
+            </a>
 
-    <!-- Finance System -->
-    <div class="flex flex-col overflow-hidden rounded-lg shadow-lg bg-gray-50 dark:bg-gray-900">
-        <div class="p-6">
-            <div class="flex-1">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-gray-200">
-                    Financial Management System
-                </h3>
-                <p class="mt-3 text-base text-gray-900 dark:text-gray-300">
+            <!-- Project 3 -->
+            <a href="https://github.com/Raghushubi/finance-management-system" target="_blank" class="project-card">
+                <div class="project-number">PROJECT_03</div>
+                <div class="project-title">Financial Management System</div>
+                <p class="project-desc">
                     Backend-focused web application built with Flask and PostgreSQL. 
                     Designed authentication and transaction APIs, implemented a normalized database schema, 
                     and ensured data consistency through structured queries and backend logic.
                 </p>
-                <p class="mt-2 text-sm text-blue-600">
-                    GitHub: https://github.com/Raghushubi/finance-management-system
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-
-                <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
-                    <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360" loading="lazy">
-                        <path class="text-primary-600 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z" />
-                        <path class="text-primary-600 text-opacity-40" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z" />
-                    </svg>
+                <div class="project-link-row">
+                    github.com/Raghushubi/finance-management-system
+                    <span class="arrow">→</span>
                 </div>
-                <div class="relative">
-                    <div class="sm:text-center">
-                        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                            
-                        </h2>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+            </a>
 
-    
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-<script src="/js/darkmode.js" defer></script>
-<footer class="bg-gray-900">
-    <div class="max-w-md px-4 py-12 mx-auto overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <nav class="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
-            
-        </nav>
-        <div class="flex justify-center mt-8 space-x-6">
-                    
         </div>
-        <p class="mt-8 text-base text-center text-gray-400">&copy; 2026 Raghu Shubhangi</p>
-    </div>
-</footer>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Raghu Shubhangi</p>
+    </footer>
+
 </body>
-
 </html>
